@@ -7,11 +7,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import AddRemoveCustomer from './components/add-remove';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+    <div className='App-header'>
+    <Routes>
+      <Route path="/" element={<App/>}/>
+      <Route index element={<App />} />
+      <Route path="add-remove" element={<AddRemoveCustomer/>}/>
+      </Routes>
+      </div>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
