@@ -9,20 +9,27 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AddRemoveCustomer from './components/add-remove';
+import configureStore from './store';
+import { Provider } from 'react-redux';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/* <BrowserRouter>
     <div className='App-header'>
-    <Routes>
+      <Routes>
       <Route path="/" element={<App/>}/>
       <Route index element={<App />} />
       <Route path="add-remove" element={<AddRemoveCustomer/>}/>
       </Routes>
-      </div>
-    </BrowserRouter>
+            </div>
+    </BrowserRouter> */}
+    <BrowserRouter>
+    <Provider store={configureStore()}>
+        <App/>
+      </Provider>
+      </BrowserRouter>
   </React.StrictMode>
 );
 

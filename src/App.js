@@ -6,8 +6,11 @@ import HomePage from './components/home-page';
 import { Link } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import NavigationLink from './navigation-link';
+import { connect } from 'react-redux';
+import { startAction } from './actions/startAction';
+import { stopAction } from './actions/stopAction.js';
 
-function App() {
+function App(props) {
   const [user, setUser] = useState(null);
   // var user;
   function handleCallbackResponse(response) {
@@ -28,11 +31,16 @@ function App() {
       {theme: "outline", size: "large"}
     );
   }, []) 
-  
+  const stopRotation = () => {
+    if(props.rotating)
+      return props.stopAction;
+    else
+      return props.startAction;
+  }
   return (
-    <header>
+    <header onClick={stopRotation()}>
         {user && <NavigationLink></NavigationLink>}
-        <p>
+        <p className={'App-logo' + (props.rotating? "" : " App-logo-paused")}>
           Welcome to Ajay Ji's
         </p>
         {!user && <div id="signInDiv"></div>}
@@ -46,4 +54,13 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+  startAction: () => dispatch(startAction),
+  stopAction: () => dispatch(stopAction)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
