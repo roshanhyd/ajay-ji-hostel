@@ -3,12 +3,19 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import HomePage from './components/home-page';
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import NavigationLink from './navigation-link';
+import {decrementCounter, incrementCounter} from './redux/action';
+import { useDispatch } from 'react-redux';
+import Header from './components/header';
+import AddRemoveCustomer from './components/add-remove';
+import PlusMinusComponent from './components/plus-minus-basic';
 
 function App() {
   const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const counter = 0;
   // var user;
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID Token : "+response.credential);
@@ -30,20 +37,16 @@ function App() {
   }, []) 
   
   return (
-    <header>
-        {user && <NavigationLink></NavigationLink>}
-        <p>
-          Welcome to Ajay Ji's
-        </p>
-        {!user && <div id="signInDiv"></div>}
-        Hello - {user}
-        {user && <Link to="/">Sign Out</Link>}
-        {user && <HomePage></HomePage>}
-    </header>
-   
- 
+    <>
+        
+        Welcome to App HomePage
+        <Routes>
+          <Route path="/" element={<Header/>}/>
+          <Route path="/add-remove" element={<PlusMinusComponent/>}/> 
+        </Routes>
+        </> 
 
-  );
+  )
 }
 
 export default App;

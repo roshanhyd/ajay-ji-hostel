@@ -9,21 +9,26 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AddRemoveCustomer from './components/add-remove';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-    <div className='App-header'>
-    <Routes>
-      <Route path="/" element={<App/>}/>
-      <Route index element={<App />} />
-      <Route path="add-remove" element={<AddRemoveCustomer/>}/>
-      </Routes>
-      </div>
+    // <BrowserRouter>
+    // <div className='App-header'>
+    // <Routes>
+    //   <Route path="/" element={<App/>}/>
+    //   <Route index element={<App />} />
+    //   <Route path="add-remove" element={<AddRemoveCustomer/>}/>
+    //   </Routes>
+    //   </div>
+    // </BrowserRouter>
+   <BrowserRouter>
+    <Provider store={store}>
+      <App/>
+    </Provider>
     </BrowserRouter>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
